@@ -446,6 +446,73 @@ button, input, select {
   background: rgba(235, 94, 85, 0.1);
 }
 
+/* Modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  padding: var(--space-4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal-title {
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+  color: var(--color-brand-purple);
+}
+
+.modal-message {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: background var(--transition-instant);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-danger {
+  background: rgba(235, 94, 85, 0.8);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: rgba(235, 94, 85, 1);
+}
+
 .todo-list {
   list-style: none;
   display: flex;
