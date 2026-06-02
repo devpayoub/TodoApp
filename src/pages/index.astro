@@ -1,0 +1,23 @@
+---
+import '../styles/global.css';
+import TodoApp from '../components/TodoApp.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>VRcafe Haarlem – Todo App</title>
+    <meta name="description" content="A premium, highly-accessible Todo application built on the VRcafe Haarlem design language. Supports full keyboard navigation and offline state persistence." />
+    <meta property="og:title" content="VRcafe Haarlem – Todo App" />
+    <meta property="og:description" content="Sleek, high-accessibility Todo application utilizing the VRcafe Haarlem design language." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <TodoApp />
+  </body>
+</html>

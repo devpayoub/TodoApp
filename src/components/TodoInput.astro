@@ -1,0 +1,32 @@
+---
+---
+
+<section class="input-section" aria-label="Add New Task">
+  <form id="todo-form" class="todo-form" novalidate>
+    <div class="input-wrapper">
+      <input
+        type="text"
+        id="todo-input"
+        class="todo-input"
+        placeholder="What needs to be done?"
+        aria-label="New task content"
+        aria-describedby="input-error"
+      />
+      <span class="input-focus-line"></span>
+    </div>
+
+    <div class="select-wrapper">
+      <label for="todo-category-select" class="sr-only">Choose Category</label>
+      <select id="todo-category-select" class="todo-category-select">
+        <option value="Werk">Werk</option>
+        <option value="Persoonlijk">Persoonlijk</option>
+        <option value="Vrije tijd">Vrije tijd</option>
+      </select>
+    </div>
+
+    <button type="submit" class="submit-btn" aria-label="Add Task">
+      Add Task
+    </button>
+  </form>
+  <div id="input-error" class="input-error" aria-live="assertive" role="alert"></div>
+</section>

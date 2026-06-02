@@ -1,0 +1,21 @@
+---
+---
+
+<section id="todo-panel" class="todo-panel" role="tabpanel" aria-labelledby="tab-all">
+
+  <div class="filter-bar" role="group" aria-label="Filter tasks by status">
+    <button class="filter-btn active" data-filter="all" id="filter-all">All</button>
+    <button class="filter-btn" data-filter="active" id="filter-active">Active</button>
+    <button class="filter-btn" data-filter="completed" id="filter-completed">Completed</button>
+    <button class="clear-completed-btn" id="clear-completed-btn" aria-label="Clear all completed tasks">Clear completed</button>
+  </div>
+
+  <ul id="todo-list" class="todo-list">
+  </ul>
+
+  <div id="empty-state" class="empty-state hidden">
+    <div class="empty-icon">🎮</div>
+    <h3>No tasks in this category</h3>
+    <p>Get started by adding one above or choose another category.</p>
+  </div>
+</section>

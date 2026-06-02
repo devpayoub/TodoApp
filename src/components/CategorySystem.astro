@@ -1,0 +1,76 @@
+---
+---
+
+<div class="desktop-category-system" aria-label="Todo Categories Sidebar">
+  <h2 class="sidebar-title">Categories</h2>
+  <nav class="category-nav" aria-label="Desktop Category Navigation">
+    <ul role="tablist" class="category-list">
+      <li role="presentation">
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="todo-panel"
+          id="tab-all"
+          class="category-btn active"
+          data-category="all"
+        >
+          <span class="category-indicator"></span>
+          All Tasks
+          <span class="badge" id="badge-all">0</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="todo-panel"
+          id="tab-werk"
+          class="category-btn"
+          data-category="Werk"
+        >
+          <span class="category-indicator Werk"></span>
+          Werk
+          <span class="badge" id="badge-werk">0</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="todo-panel"
+          id="tab-persoonlijk"
+          class="category-btn"
+          data-category="Persoonlijk"
+        >
+          <span class="category-indicator Persoonlijk"></span>
+          Persoonlijk
+          <span class="badge" id="badge-persoonlijk">0</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="todo-panel"
+          id="tab-vrije-tijd"
+          class="category-btn"
+          data-category="Vrije tijd"
+        >
+          <span class="category-indicator VrijeTijd"></span>
+          Vrije tijd
+          <span class="badge" id="badge-vrije-tijd">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="mobile-category-selector" aria-label="Mobile Category Selector">
+  <label for="mobile-category-dropdown" class="mobile-select-label">Category:</label>
+  <select id="mobile-category-dropdown" class="mobile-select">
+    <option value="all">All Tasks</option>
+    <option value="Werk">Werk</option>
+    <option value="Persoonlijk">Persoonlijk</option>
+    <option value="Vrije tijd">Vrije tijd</option>
+  </select>
+</div>
