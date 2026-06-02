@@ -35,7 +35,21 @@ export function updateCategoryUI(category: string): void {
     btn.setAttribute('aria-selected', String(match));
   });
 
-  if (elements.mobileSelect) elements.mobileSelect.value = category;
+  if (elements.mobileSelect) {
+    elements.mobileSelect.value = category;
+    const wrapper = elements.mobileSelect.closest('.custom-select-wrapper');
+    if (wrapper) {
+      const triggerSpan = wrapper.querySelector('.custom-select-trigger span');
+      if (triggerSpan) {
+        triggerSpan.textContent = elements.mobileSelect.options[elements.mobileSelect.selectedIndex]?.text || '';
+      }
+      wrapper.querySelectorAll('.custom-select-option').forEach(el => {
+        const match = (el as HTMLElement).dataset.value === category;
+        el.classList.toggle('selected', match);
+        el.setAttribute('aria-selected', String(match));
+      });
+    }
+  }
   if (elements.currentCategoryHeading) {
     elements.currentCategoryHeading.textContent = category === 'all' ? 'All Tasks' : category;
   }
@@ -141,5 +155,107 @@ export function render(
     elements.todoList!.appendChild(li);
 
     if (focusId && todo.id === focusId) contentEl?.focus();
+  });
+}
+
+export function initCustomDropdowns(): void {
+  const selects = [elements.mobileSelect, elements.todoCategorySelect];
+  
+  selects.forEach(select => {
+    if (!select) return;
+    
+    // Prevent double initialization
+    if (select.classList.contains('hidden-select')) return;
+    
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-select-wrapper';
+    
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'custom-select-trigger';
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+    
+    const triggerSpan = document.createElement('span');
+    triggerSpan.textContent = select.options[select.selectedIndex]?.text || '';
+    trigger.appendChild(triggerSpan);
+    
+    const optionsList = document.createElement('ul');
+    optionsList.className = 'custom-select-options';
+    optionsList.role = 'listbox';
+    
+    Array.from(select.options).forEach(opt => {
+      const li = document.createElement('li');
+      li.className = 'custom-select-option';
+      li.role = 'option';
+      li.tabIndex = -1; // Keep list elements not directly tabbable, navigate with arrow keys or click
+      li.dataset.value = opt.value;
+      li.textContent = opt.text;
+      li.setAttribute('aria-selected', String(opt.selected));
+      if (opt.selected) {
+        li.classList.add('selected');
+      }
+      
+      li.addEventListener('click', (e) => {
+        e.stopPropagation();
+        select.value = opt.value;
+        triggerSpan.textContent = opt.text;
+        
+        optionsList.querySelectorAll('.custom-select-option').forEach(el => {
+          el.classList.remove('selected');
+          el.setAttribute('aria-selected', 'false');
+        });
+        li.classList.add('selected');
+        li.setAttribute('aria-selected', 'true');
+        
+        // Dispatch event
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      });
+      
+      optionsList.appendChild(li);
+    });
+    
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrapper.classList.contains('open');
+      // Close all custom selects
+      document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+        w.classList.remove('open');
+        w.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+      
+      if (!isOpen) {
+        wrapper.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', () => {
+      wrapper.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+    
+    // Keyboard navigation
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        wrapper.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+    
+    // Insert wrapper in DOM
+    select.parentNode?.insertBefore(wrapper, select);
+    wrapper.appendChild(select); // move native select inside wrapper
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(optionsList);
+    
+    // Hide native select visually
+    select.classList.add('hidden-select');
   });
 }

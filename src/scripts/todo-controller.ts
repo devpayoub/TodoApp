@@ -6,7 +6,9 @@ import {
   clearCompletedState,
   setCategoryState,
   setFilterState,
-  getTodos
+  getTodos,
+  getCurrentCategory,
+  getCurrentFilter
 } from './store';
 
 import {
@@ -14,7 +16,8 @@ import {
   announce,
   updateCategoryUI,
   updateFilterUI,
-  render
+  render,
+  initCustomDropdowns
 } from './ui';
 
 let todoToDelete: { id: string, item: HTMLElement } | null = null;
@@ -147,4 +150,7 @@ elements.todoInput?.addEventListener('input', () => {
 
 // Initialization
 loadState();
+initCustomDropdowns();
+updateCategoryUI(getCurrentCategory());
+updateFilterUI(getCurrentFilter());
 reRender();
